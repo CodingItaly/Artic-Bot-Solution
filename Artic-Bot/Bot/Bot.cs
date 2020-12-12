@@ -8,7 +8,7 @@
 
     i might have a obsessive-compulsive disorder
     but honestly i like formatting all variables, spaces
-    and shit soo... feel free to delete this ton of shit and 
+    and other stuff too soo... feel free to delete this ton of shit and 
     reformat it but i like it so... ;)
 
 */
@@ -19,8 +19,12 @@
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types.Enums;
-using Telegram.Bot.Types;
+
 using Artic_Bot.Global;
+using Artic_Bot.Configurations;
+
+using _File = System.IO.File;
+using System.Threading.Tasks;
 
 namespace Artic_Bot.Bot
 {
@@ -28,6 +32,7 @@ namespace Artic_Bot.Bot
     {
         #region globals
         Variable var = new Variable();
+        Setting set = new Setting();
         readonly ITelegramBotClient _client;
         #endregion
         #region listen
@@ -60,7 +65,7 @@ namespace Artic_Bot.Bot
             var.chatUserName   = messageEventArgs.Message.Chat.Username;
             var message = messageEventArgs.Message;
             #endregion
-
+            SettingsCheck();
             switch (message.Type)  {
                 case MessageType.Text             : break;
                 case MessageType.ChatMembersAdded : break;
@@ -70,11 +75,14 @@ namespace Artic_Bot.Bot
             }
         }
         #endregion
-        #region modules
-        private async void Join()
-        {
 
-        } 
-        #endregion
+        public Task SettingsCheck()
+        {
+            if (_File.Exists(var.chatId.ToString()))
+                set.deserialize();
+            else
+                set.serialize();
+            return SettingsCheck();
+        }
     }
 }

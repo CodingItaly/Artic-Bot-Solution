@@ -8,7 +8,7 @@
 
     i might have a obsessive-compulsive disorder
     but honestly i like formatting all variables, spaces
-    and shit soo... feel free to delete this ton of shit and 
+    and other stuff too soo... feel free to delete this ton of shit and 
     reformat it but i like it so... ;)
 
 */

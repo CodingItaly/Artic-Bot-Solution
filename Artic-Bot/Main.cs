@@ -9,6 +9,7 @@ namespace Artic_Bot
         static Variable var = new Variable();
         static void Main(string[] args)
         {
+
             var botClient = new TelegramBotClient(var.token);
             var start = new Start(botClient);
             start.listen(true);
