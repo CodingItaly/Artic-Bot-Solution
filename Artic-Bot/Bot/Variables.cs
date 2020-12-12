@@ -27,7 +27,7 @@ public class Variable              {
            set { token = "token"; }
         }
  
-        public long     chatId         { get; set; }
+        public long    chatId         { get; set; }
         public string  chatDescription { get; set; }
         public string  chatFirstName   { get; set; }
         public string  chatLastName    { get; set; }
