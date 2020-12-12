@@ -20,13 +20,14 @@ using Telegram.Bot.Types;
 
 namespace  Artic_Bot.Global {
 public class Variable              {
-
+        /* Configuration */
         public string token 
         { 
            get { return token; } 
            set { token = "token"; }
         }
- 
+        public char prefix             { get; set; }
+        /* Chat */
         public long    chatId          { get; set; }
         public string  chatDescription { get; set; }
         public string  chatFirstName   { get; set; }
@@ -34,7 +35,10 @@ public class Variable              {
         public string  chatUserName    { get; set; }
         public string  chatTitle       { get; set; }
         public string  chatInviteLink  { get; set; }
+        /* Message */
+        public string  messageText     { get; set; }
 
+        /* SubChat Class*/
         public ChatPhoto chatPhoto = new ChatPhoto();
 
     }

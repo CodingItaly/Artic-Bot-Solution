@@ -21,7 +21,8 @@ using Telegram.Bot.Args;
 using Telegram.Bot.Types.Enums;
 
 using Artic_Bot.Global;
-using Artic_Bot.Configurations;
+using Artic_Bot.JsSettings;
+using Artic_Bot.Status;
 
 using _File = System.IO.File;
 using System.Threading.Tasks;
@@ -31,8 +32,10 @@ namespace Artic_Bot.Bot
     class Start
     {
         #region globals
+        DeSeRialize json = new DeSeRialize();
         Variable var = new Variable();
         Setting set = new Setting();
+        Check check = new Check();
         readonly ITelegramBotClient _client;
         #endregion
         #region listen
@@ -54,7 +57,8 @@ namespace Artic_Bot.Bot
         #region methods
         private void OnMessage(object sender, MessageEventArgs messageEventArgs)
         {
-            #region vars
+            #region =Variables
+            #region ->chat
             var.chatId          = messageEventArgs.Message.Chat.Id;
             var.chatDescription = messageEventArgs.Message.Chat.Description;
             var.chatFirstName   = messageEventArgs.Message.Chat.FirstName;
@@ -63,9 +67,16 @@ namespace Artic_Bot.Bot
             var.chatInviteLink  = messageEventArgs.Message.Chat.InviteLink;
             var.chatPhoto       = messageEventArgs.Message.Chat.Photo;
             var.chatUserName    = messageEventArgs.Message.Chat.Username;
-            var message         = messageEventArgs.Message;
             #endregion
-            SettingsCheck();
+            #region ->message
+            var.messageText     = messageEventArgs.Message.Text;
+            #endregion
+            #region ->local
+            var message  = messageEventArgs.Message;
+            string[] text     = var.messageText.Remove(var.prefix).Split(" ");
+            #endregion
+            #endregion
+            check.CheckStatus(text[0]);
             switch (message.Type)  {
                 case MessageType.Text             : break;
                 case MessageType.ChatMembersAdded : break;
@@ -74,15 +85,14 @@ namespace Artic_Bot.Bot
                 default                           : break;
             }
         }
-        #endregion
-
         public Task SettingsCheck()
         {
             if (_File.Exists(var.chatId.ToString()))
-                set.deserialize();
+                json.deserialize();
             else
-                set.serialize();
+                json.serialize();
             return SettingsCheck();
         }
+        #endregion
     }
 }

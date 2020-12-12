@@ -25,35 +25,31 @@ using Newtonsoft.Json.Converters;
 
 using Artic_Bot.Global;
 
-namespace Artic_Bot.Configurations
+namespace Artic_Bot.JsSettings
 {
-    class Setting
+    class DeSeRialize
     {
         Variable var = new Variable();
-        Config self = new Config();
+        Setting self = new Setting();
         public void serialize()
         {
             File.WriteAllText(var.chatId.ToString(), JsonConvert.SerializeObject(self, Converter.Settings));
         }
         public void deserialize()
         {
-            JsonConvert.DeserializeObject<Config>(File.ReadAllText(var.chatId.ToString()), Converter.Settings);
+            JsonConvert.DeserializeObject<Setting>(File.ReadAllText(var.chatId.ToString()), Converter.Settings);
         }
-
-        public bool join = true;
-        public bool leave = true;
-        public bool titleChange = true;
     }
-    public partial class Config
+    public partial class Setting
     {
         [JsonProperty("join")]
         [JsonConverter(typeof(ParseStringConverter))]
         public bool Join { get; set; }
-
-        [JsonProperty("enter")]
+        //
+        [JsonProperty("Leave")]
         [JsonConverter(typeof(ParseStringConverter))]
-        public bool Enter { get; set; }
-
+        public bool Leave { get; set; }
+        //
         [JsonProperty("changeTitle")]
         [JsonConverter(typeof(ParseStringConverter))]
         public bool ChangeTitle { get; set; }
@@ -73,7 +69,6 @@ namespace Artic_Bot.Configurations
     internal class ParseStringConverter : JsonConverter
     {
         public override bool CanConvert(Type t) => t == typeof(bool) || t == typeof(bool?);
-
         public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
         {
             if (reader.TokenType == JsonToken.Null) return null;
@@ -85,7 +80,6 @@ namespace Artic_Bot.Configurations
             }
             throw new Exception("Cannot unmarshal type bool");
         }
-
         public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
         {
             if (untypedValue == null)
@@ -98,7 +92,6 @@ namespace Artic_Bot.Configurations
             serializer.Serialize(writer, boolString);
             return;
         }
-
         public static readonly ParseStringConverter Singleton = new ParseStringConverter();
     }
 }
