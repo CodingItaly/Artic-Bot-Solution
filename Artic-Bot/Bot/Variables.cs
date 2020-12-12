@@ -27,13 +27,13 @@ public class Variable              {
            set { token = "token"; }
         }
  
-        public long     chatId                { get; set; }
+        public long    chatId         { get; set; }
         public string  chatDescription { get; set; }
         public string  chatFirstName   { get; set; }
         public string  chatLastName    { get; set; }
-        public string  chatUserName   { get; set; }
-        public string  chatTitle            { get; set; }
-        public string  chatInviteLink   { get; set; }
+        public string  chatUserName    { get; set; }
+        public string  chatTitle       { get; set; }
+        public string  chatInviteLink  { get; set; }
 
         public ChatPhoto chatPhoto = new ChatPhoto();
 

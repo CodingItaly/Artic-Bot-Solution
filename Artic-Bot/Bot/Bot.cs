@@ -55,15 +55,15 @@ namespace Artic_Bot.Bot
         private void OnMessage(object sender, MessageEventArgs messageEventArgs)
         {
             #region vars
-            var.chatId                 = messageEventArgs.Message.Chat.Id;
+            var.chatId          = messageEventArgs.Message.Chat.Id;
             var.chatDescription = messageEventArgs.Message.Chat.Description;
             var.chatFirstName   = messageEventArgs.Message.Chat.FirstName;
             var.chatLastName    = messageEventArgs.Message.Chat.LastName;
-            var.chatTitle             = messageEventArgs.Message.Chat.Title;
-            var.chatInviteLink    = messageEventArgs.Message.Chat.InviteLink;
-            var.chatPhoto           = messageEventArgs.Message.Chat.Photo;
-            var.chatUserName   = messageEventArgs.Message.Chat.Username;
-            var message = messageEventArgs.Message;
+            var.chatTitle       = messageEventArgs.Message.Chat.Title;
+            var.chatInviteLink  = messageEventArgs.Message.Chat.InviteLink;
+            var.chatPhoto       = messageEventArgs.Message.Chat.Photo;
+            var.chatUserName    = messageEventArgs.Message.Chat.Username;
+            var message         = messageEventArgs.Message;
             #endregion
             SettingsCheck();
             switch (message.Type)  {
