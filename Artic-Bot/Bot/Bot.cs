@@ -1,4 +1,4 @@
-﻿/* 
+/* 
  
   <=[Artic-Bot]=>
   
@@ -30,10 +30,10 @@ namespace Artic_Bot.Bot
     {
         // Define classes and public variables
         #region globals
-        DeSeRialize json = new DeSeRialize(); // Class for JSON serialization & deserializations
-        Variable var = new Variable();        // Class for public variables
-        Setting set = new Setting();          // Class for public Bools  & Settings 
-        Check check = new Check();            // Class to check Modules & Settings status
+        DeSeRialize json  = new DeSeRialize(); // Class for JSON serialization & deserializations
+        Variable    var   = new Variable   (); // Class for public variables
+        Setting     set   = new Setting    (); // Class for public Bools  & Settings 
+        Check       check = new Check      (); // Class to check Modules & Settings status
         // Telegram Bot Client
         readonly ITelegramBotClient _client;
         #endregion
@@ -41,16 +41,13 @@ namespace Artic_Bot.Bot
         #region listen
         public void listen(bool status)
         {
-            if (status == true)  // Case call is true, start listening
-                _client.StartReceiving();
-            else                 // Case call is false, stop listening 
-                _client.StopReceiving(); 
+            if (status == true) _client.StartReceiving(); // Case call is true, start listening
+            else _client.StopReceiving(); // Case call is false, stop listening 
         }
         #endregion
         // Client set for _client, local var client and OnMessage event
         #region client
-        public Start(ITelegramBotClient client)
-        { 
+        public Start(ITelegramBotClient client) { 
             _client = client; 
             client.OnMessage += OnMessage; 
         }
@@ -101,10 +98,8 @@ namespace Artic_Bot.Bot
         // Create JSON configuration file if not existing
         public Task SettingsCheck()
         {
-            if (_File.Exists(var.chatId.ToString()))
-                json.deserialize();
-            else
-                json.serialize();
+            if (_File.Exists(var.chatId.ToString())) json.deserialize();
+            else json.serialize();
             return SettingsCheck();
         }
         #endregion
