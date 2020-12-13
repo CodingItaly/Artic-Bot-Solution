@@ -4,12 +4,7 @@
   
   [Author] - Ilkay Solotov
   [CreationDate] - 12/12/20
-  [LastUpdate] - 12/12/20
-
-    i might have a obsessive-compulsive disorder
-    but honestly i like formatting all variables, spaces
-    and other stuff too soo... feel free to delete this ton of shit and 
-    reformat it but i like it so... ;)
+  [LastUpdate] - 13/12/20
 
 */
 
@@ -27,19 +22,22 @@ using Artic_Bot.Global;
 
 namespace Artic_Bot.JsSettings
 {
+    // JSON Serialization / Deserialization Class
     class DeSeRialize
     {
+        // Define classes and public variables
+        #region variables
         Variable var = new Variable();
         Setting self = new Setting();
-        public void serialize()
-        {
-            File.WriteAllText(var.chatId.ToString(), JsonConvert.SerializeObject(self, Converter.Settings));
-        }
-        public void deserialize()
-        {
-            JsonConvert.DeserializeObject<Setting>(File.ReadAllText(var.chatId.ToString()), Converter.Settings);
-        }
+        #endregion
+        // Serialize settings to JSON and write them to JSON file
+        public void serialize() {
+            File.WriteAllText(var.chatId.ToString(), JsonConvert.SerializeObject(self, Converter.Settings)); }
+        // Deserialize settings to be used on restart
+        public void deserialize() {
+            JsonConvert.DeserializeObject<Setting>(File.ReadAllText(var.chatId.ToString()), Converter.Settings); }
     }
+    // Settings Class where all setting's bools are stored ready for JSON serialization and toggling
     public partial class Setting
     {
         [JsonProperty("join")]
@@ -54,6 +52,7 @@ namespace Artic_Bot.JsSettings
         [JsonConverter(typeof(ParseStringConverter))]
         public bool ChangeTitle { get; set; }
     }
+    // JSON Stuff, no need to touch those
     internal static class Converter
     {
         public static readonly JsonSerializerSettings Settings = new JsonSerializerSettings

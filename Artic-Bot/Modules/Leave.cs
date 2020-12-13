@@ -17,8 +17,8 @@ using Artic_Bot.JsSettings;
 
 namespace Artic_Bot.Modules
 {
-    // Class for Join Module
-    class Join
+    // Class for Leave Module
+    class Leave
     {
         // Define classes and public variables
         #region variables
@@ -27,7 +27,7 @@ namespace Artic_Bot.Modules
         #region module
         private async Task Main()
         {
-            // ToDo
+           // ToDo
         }
         #endregion
     }

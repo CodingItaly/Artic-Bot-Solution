@@ -11,24 +11,13 @@
 /* ɪ ᴋɴᴏᴡ ᴍᴏꜱᴛ ᴏꜰ ᴛʜᴏꜱᴇ ꜰᴏʀᴍᴀᴛᴛɪɴɢ ᴛʏᴘᴇꜱ ᴀʀᴇ ᴄᴏᴍᴘʟᴇᴛᴇʟʏ
     ᴡʀᴏɴɢ, ʙᴜᴛ ɪᴛꜱ ᴍʏ ᴘᴇʀꜱᴏɴᴀʟ ᴡᴀʏ ᴛᴏ ꜰᴏʀᴍᴀᴛ ᴍʏ ᴄᴏᴅᴇ :+) */
 
-using System.Threading.Tasks;
-
-using Artic_Bot.JsSettings;
-
 namespace Artic_Bot.Modules
 {
-    // Class for Join Module
-    class Join
+    // Needed to forward modules from Check method
+    class Module
     {
-        // Define classes and public variables
-        #region variables
-        Setting setting = new Setting();
-        #endregion
-        #region module
-        private async Task Main()
-        {
-            // ToDo
-        }
-        #endregion
+        public async void Join() { }
+        public async void Leave() { }
+        public async void ChangeTitle() { }
     }
 }

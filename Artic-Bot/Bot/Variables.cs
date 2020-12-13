@@ -4,12 +4,7 @@
   
   [Author] - Ilkay Solotov
   [CreationDate] - 12/12/20
-  [LastUpdate] - 12/12/20
-
-    i might have a obsessive-compulsive disorder
-    but honestly i like formatting all variables, spaces
-    and other stuff too soo... feel free to delete this ton of shit and 
-    reformat it but i like it so... ;)
+  [LastUpdate] - 13/12/20
 
 */
 
@@ -18,28 +13,27 @@
 
 using Telegram.Bot.Types;
 
-namespace  Artic_Bot.Global {
+namespace Artic_Bot.Global {
 public class Variable              {
-        /* Configuration */
+        // Configuration variables 
         public string token 
         { 
            get { return token; } 
            set { token = "token"; }
-        }
-        public char prefix             { get; set; }
-        /* Chat */
-        public long    chatId          { get; set; }
-        public string  chatDescription { get; set; }
-        public string  chatFirstName   { get; set; }
-        public string  chatLastName    { get; set; }
-        public string  chatUserName    { get; set; }
-        public string  chatTitle       { get; set; }
-        public string  chatInviteLink  { get; set; }
-        /* Message */
-        public string  messageText     { get; set; }
-
-        /* SubChat Class*/
-        public ChatPhoto chatPhoto = new ChatPhoto();
+        } // Bot's Token
+        public char prefix             { get; set; } // Bot's commands prefix
+        // Chat variables 
+        public long    chatId          { get; set; }  // Id              of the chat where message has been sent
+        public string  chatDescription { get; set; }  // Description     of the chat where message has been sent 
+        public string  chatFirstName   { get; set; }  // FirstName       of the chat where message has been sent
+        public string  chatLastName    { get; set; }  // LastName        of the chat where message has been sent
+        public string  chatUserName    { get; set; }  // ChatTag         of the chat where message has been sent
+        public string  chatTitle       { get; set; }  // ChatTitle       of the chat where message has been sent
+        public string  chatInviteLink  { get; set; }  // ChatInviteLink  of the chat where message has been sent
+        // Message variables 
+        public string  messageText     { get; set; }  // MessageContent  of the message
+        // SubChat Class variables 
+        public ChatPhoto chatPhoto = new ChatPhoto(); // ChatPicture    of the chat where message has been sent
 
     }
 }

@@ -4,17 +4,14 @@
   
   [Author] - Ilkay Solotov
   [CreationDate] - 12/12/20
-  [LastUpdate] - 12/12/20
-
-    i might have a obsessive-compulsive disorder
-    but honestly i like formatting all variables, spaces
-    and other stuff too soo... feel free to delete this ton of shit and 
-    reformat it but i like it so... ;)
+  [LastUpdate] - 13/12/20
 
 */
 
 /* ɪ ᴋɴᴏᴡ ᴍᴏꜱᴛ ᴏꜰ ᴛʜᴏꜱᴇ ꜰᴏʀᴍᴀᴛᴛɪɴɢ ᴛʏᴘᴇꜱ ᴀʀᴇ ᴄᴏᴍᴘʟᴇᴛᴇʟʏ
     ᴡʀᴏɴɢ, ʙᴜᴛ ɪᴛꜱ ᴍʏ ᴘᴇʀꜱᴏɴᴀʟ ᴡᴀʏ ᴛᴏ ꜰᴏʀᴍᴀᴛ ᴍʏ ᴄᴏᴅᴇ :+) */
+
+using System.Threading.Tasks;
 
 using Telegram.Bot;
 using Telegram.Bot.Args;
@@ -25,39 +22,53 @@ using Artic_Bot.JsSettings;
 using Artic_Bot.Status;
 
 using _File = System.IO.File;
-using System.Threading.Tasks;
 
 namespace Artic_Bot.Bot
 {
+    // Main class
     class Start
     {
+        // Define classes and public variables
         #region globals
-        DeSeRialize json = new DeSeRialize();
-        Variable var = new Variable();
-        Setting set = new Setting();
-        Check check = new Check();
+        DeSeRialize json = new DeSeRialize(); // Class for JSON serialization & deserializations
+        Variable var = new Variable();        // Class for public variables
+        Setting set = new Setting();          // Class for public Bools  & Settings 
+        Check check = new Check();            // Class to check Modules & Settings status
+        // Telegram Bot Client
         readonly ITelegramBotClient _client;
         #endregion
+        // Start & Stop listening 
         #region listen
         public void listen(bool status)
         {
-            if (status == true) 
+            if (status == true)  // Case call is true, start listening
                 _client.StartReceiving();
-            else
+            else                 // Case call is false, stop listening 
                 _client.StopReceiving(); 
         }
         #endregion
-        #region onEvent
+        // Client set for _client, local var client and OnMessage event
+        #region client
         public Start(ITelegramBotClient client)
         { 
             _client = client; 
             client.OnMessage += OnMessage; 
         }
         #endregion
+        // All methods for this class, OnMessage, SettingsCheck, etc
         #region methods
-        private void OnMessage(object sender, MessageEventArgs messageEventArgs)
+        private async void OnMessage(object sender, MessageEventArgs messageEventArgs)
         {
+            // Define global variables with the OnMessage ones, this way you can use them everywhere if needed
             #region =Variables
+            /*
+               Variables are stored here:
+               Bot (Folder)
+                 - Variables.cs (ClassFile)
+                   - Artic_Bot.Global (NameSpace)
+                     - Variable (Class)
+            */
+            // Variables regarding Chat
             #region ->chat
             var.chatId          = messageEventArgs.Message.Chat.Id;
             var.chatDescription = messageEventArgs.Message.Chat.Description;
@@ -68,15 +79,17 @@ namespace Artic_Bot.Bot
             var.chatPhoto       = messageEventArgs.Message.Chat.Photo;
             var.chatUserName    = messageEventArgs.Message.Chat.Username;
             #endregion
+            // Variables regarding Messages
             #region ->message
             var.messageText     = messageEventArgs.Message.Text;
             #endregion
+            // Just Variables
             #region ->local
-            var message  = messageEventArgs.Message;
-            string[] text     = var.messageText.Remove(var.prefix).Split(" ");
+            var message    = messageEventArgs.Message;
+            string[] text  = var.messageText.Remove(var.prefix).Split(" ");
             #endregion
             #endregion
-            check.CheckStatus(text[0]);
+            // Temporarely useless, will be needed to call proper methods, will be used later
             switch (message.Type)  {
                 case MessageType.Text             : break;
                 case MessageType.ChatMembersAdded : break;
@@ -85,6 +98,7 @@ namespace Artic_Bot.Bot
                 default                           : break;
             }
         }
+        // Create JSON configuration file if not existing
         public Task SettingsCheck()
         {
             if (_File.Exists(var.chatId.ToString()))
